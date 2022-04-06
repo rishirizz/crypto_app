@@ -1,5 +1,6 @@
 import 'package:crypto_app/screens/dashboard_screen.dart';
 import 'package:crypto_app/screens/splash_screen.dart';
+import 'package:crypto_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,9 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: lightModeTheme,
+      darkTheme: darkModeTheme,
       home: const DashBoardScreen(),
       onGenerateRoute: (RouteSettings settings) {
         debugPrint('build route for ${settings.name}');
