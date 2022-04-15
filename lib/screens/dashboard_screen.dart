@@ -46,8 +46,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            cryptoCoins[index]['name'],
+                          Row(
+                            children: [
+                              Text(
+                                cryptoCoins[index]['name'],
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text('(' + cryptoCoins[index]['symbol'] + ')'),
+                            ],
+                          ),
+                          const Divider(
+                            thickness: 2,
                           ),
                           Text(
                             'Price : \$ ${cryptoCoins[index]['price']}',
