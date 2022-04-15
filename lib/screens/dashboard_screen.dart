@@ -12,6 +12,8 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   List cryptoCoins = [];
+  bool isApiCallProcess = false;
+
   @override
   void initState() {
     super.initState();
@@ -29,111 +31,121 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           elevation: 3,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView.builder(
-            cacheExtent: 2500,
-            itemCount: cryptoCoins.length,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) => Card(
-              elevation: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      // child: SvgPicture.network(
-                      //   cryptoCoins[index]['logo_url'],
-                      //   height: 90,
-                      // ),
-                      child: Image.network(
-                        cryptoCoins[index]['logo_url'],
-                        height: 90,
-                        errorBuilder: (context, error, stackTrace) =>
-                            SvgPicture.network(
-                          cryptoCoins[index]['logo_url'],
-                          height: 90,
+            padding: const EdgeInsets.all(10.0),
+            child: (isApiCallProcess == true)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Lottie.asset('assets/crypto_loading.json'),
+                      const Text('Hold Up, Loading...'),
+                    ],
+                  )
+                : ListView.builder(
+                    cacheExtent: 2500,
+                    itemCount: cryptoCoins.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) => Card(
+                      elevation: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Image.network(
+                                cryptoCoins[index]['logo_url'],
+                                height: 90,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    SvgPicture.network(
+                                  cryptoCoins[index]['logo_url'],
+                                  height: 90,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        cryptoCoins[index]['name'],
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text('(' +
+                                          cryptoCoins[index]['symbol'] +
+                                          ')'),
+                                      const Expanded(
+                                        child: SizedBox(),
+                                      ),
+                                      if (index == 0)
+                                        Lottie.asset(
+                                          'assets/gold-badge.json',
+                                          height: 30,
+                                        ),
+                                      if (index == 1)
+                                        Lottie.asset(
+                                          'assets/silver-badge.json',
+                                          height: 30,
+                                        ),
+                                      if (index == 2)
+                                        Lottie.asset(
+                                          'assets/bronze-badge.json',
+                                          height: 30,
+                                        ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 2,
+                                  ),
+                                  Text(
+                                    'Price : \$ ${cryptoCoins[index]['price']}',
+                                  ),
+                                  Text(
+                                    'Market Capital : \$ ${cryptoCoins[index]['market_cap']}',
+                                  ),
+                                  Text(
+                                    'Rank : ${cryptoCoins[index]['rank']}',
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'Market Dominance : ',
+                                      ),
+                                      Text(
+                                        (double.parse(cryptoCoins[index][
+                                                        'market_cap_dominance']) *
+                                                    100)
+                                                .toStringAsFixed(2) +
+                                            ' %',
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                cryptoCoins[index]['name'],
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text('(' + cryptoCoins[index]['symbol'] + ')'),
-                              const Expanded(
-                                child: SizedBox(),
-                              ),
-                              if (index == 0)
-                                Lottie.asset(
-                                  'assets/gold-badge.json',
-                                  height: 30,
-                                ),
-                              if (index == 1)
-                                Lottie.asset(
-                                  'assets/silver-badge.json',
-                                  height: 30,
-                                ),
-                              if (index == 2)
-                                Lottie.asset(
-                                  'assets/bronze-badge.json',
-                                  height: 30,
-                                ),
-                            ],
-                          ),
-                          const Divider(
-                            thickness: 2,
-                          ),
-                          Text(
-                            'Price : \$ ${cryptoCoins[index]['price']}',
-                          ),
-                          Text(
-                            'Market Capital : \$ ${cryptoCoins[index]['market_cap']}',
-                          ),
-                          Text(
-                            'Rank : ${cryptoCoins[index]['rank']}',
-                          ),
-                          Row(
-                            children: [
-                              const Text(
-                                'Market Dominance : ',
-                              ),
-                              Text(
-                                (double.parse(cryptoCoins[index]
-                                                ['market_cap_dominance']) *
-                                            100)
-                                        .toStringAsFixed(2) +
-                                    ' %',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+                  )),
       ),
     );
   }
 
   Future getMyCryptoCurrency() async {
+    setState(() {
+      isApiCallProcess = true;
+    });
     getCryptoCurrency().then((reponse) {
       setState(() {
+        isApiCallProcess = false;
         cryptoCoins = reponse;
         debugPrint('CRYPTOCOINS=====> $cryptoCoins');
       });

@@ -31,6 +31,7 @@ flutter:
     - assets/gold-badge.json
     - assets/silver-badge.json
     - assets/bronze-badge.json
+    - assets/crypto_loading.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
