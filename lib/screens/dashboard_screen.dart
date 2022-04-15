@@ -84,8 +84,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           Text(
                             'Rank : ${cryptoCoins[index]['rank']}',
                           ),
-                          Text(
-                            'Market Dominance : ${cryptoCoins[index]['market_cap_dominance']}',
+                          Row(
+                            children: [
+                              const Text(
+                                'Market Dominance : ',
+                              ),
+                              Text(
+                                (double.parse(cryptoCoins[index]
+                                                ['market_cap_dominance']) *
+                                            100)
+                                        .toStringAsFixed(2) +
+                                    ' %',
+                              ),
+                            ],
                           ),
                         ],
                       ),
