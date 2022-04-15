@@ -1,6 +1,7 @@
 import 'package:crypto_app/api_services/crypto_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -30,6 +31,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView.builder(
+            cacheExtent: 2500,
             itemCount: cryptoCoins.length,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (BuildContext context, int index) => Card(
@@ -70,6 +72,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 width: 8,
                               ),
                               Text('(' + cryptoCoins[index]['symbol'] + ')'),
+                              const Expanded(
+                                child: SizedBox(),
+                              ),
+                              if (index == 0)
+                                Lottie.asset(
+                                  'assets/gold-badge.json',
+                                  height: 30,
+                                ),
+                              if (index == 1)
+                                Lottie.asset(
+                                  'assets/silver-badge.json',
+                                  height: 30,
+                                ),
+                              if (index == 2)
+                                Lottie.asset(
+                                  'assets/bronze-badge.json',
+                                  height: 30,
+                                ),
                             ],
                           ),
                           const Divider(
