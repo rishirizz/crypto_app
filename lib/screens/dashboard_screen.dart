@@ -39,9 +39,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: SvgPicture.network(
+                      // child: SvgPicture.network(
+                      //   cryptoCoins[index]['logo_url'],
+                      //   height: 90,
+                      // ),
+                      child: Image.network(
                         cryptoCoins[index]['logo_url'],
-                        height: 100,
+                        height: 90,
+                        errorBuilder: (context, error, stackTrace) =>
+                            SvgPicture.network(
+                          cryptoCoins[index]['logo_url'],
+                          height: 90,
+                        ),
                       ),
                     ),
                     const SizedBox(
