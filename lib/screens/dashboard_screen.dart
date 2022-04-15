@@ -57,7 +57,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           ),
                           Text(
                             'Rank : ${cryptoCoins[index]['rank']}',
-                          )
+                          ),
+                          Text(
+                            'Market Dominance : ${cryptoCoins[index]['market_cap_dominance']}',
+                          ),
                         ],
                       ),
                     ),
@@ -73,8 +76,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   Future getMyCryptoCurrency() async {
     getCryptoCurrency().then((reponse) {
-      cryptoCoins = reponse;
-      debugPrint('CRYPTOCOINS=====> $cryptoCoins');
+      setState(() {
+        cryptoCoins = reponse;
+        debugPrint('CRYPTOCOINS=====> $cryptoCoins');
+      });
     });
   }
 }
