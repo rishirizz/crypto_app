@@ -31,7 +31,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           elevation: 3,
         ),
         body: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 0),
             child: (isApiCallProcess == true)
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,13 +52,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: Image.network(
-                                cryptoCoins[index]['logo_url'],
-                                height: 90,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    SvgPicture.network(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 4.0),
+                                child: Image.network(
                                   cryptoCoins[index]['logo_url'],
                                   height: 90,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      SvgPicture.network(
+                                    cryptoCoins[index]['logo_url'],
+                                    height: 90,
+                                  ),
                                 ),
                               ),
                             ),
@@ -103,6 +106,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   ),
                                   const Divider(
                                     thickness: 2,
+                                    color: Colors.teal,
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
                                   ),
                                   Text(
                                     'Price : \$ ${cryptoCoins[index]['price']}',
