@@ -21,6 +21,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Crypto Tracker',
+          ),
+          elevation: 3,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView.builder(
