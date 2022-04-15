@@ -119,11 +119,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     const SizedBox(
                                       height: 4,
                                     ),
-                                    Text(
-                                      'Price : \$ ${cryptoCoins[index]['price']}',
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          'Price :  \$',
+                                        ),
+                                        Text(
+                                          double.parse(
+                                                  cryptoCoins[index]['price'])
+                                              .toStringAsFixed(2),
+                                        ),
+                                      ],
                                     ),
                                     Text(
-                                      'Market Capital : \$ ${cryptoCoins[index]['market_cap']}',
+                                      'Market Capital :  \$${cryptoCoins[index]['market_cap']}',
                                     ),
                                     Text(
                                       'Rank : ${cryptoCoins[index]['rank']}',
