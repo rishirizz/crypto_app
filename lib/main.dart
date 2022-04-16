@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: lightModeTheme,
       darkTheme: darkModeTheme,
-      home: const DashBoardScreen(),
+      home: const SplashScreen(),
       onGenerateRoute: (RouteSettings settings) {
         debugPrint('build route for ${settings.name}');
         var routes = <String, WidgetBuilder>{
