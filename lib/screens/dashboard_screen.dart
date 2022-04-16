@@ -71,6 +71,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           );
                         },
                         child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           elevation: 3,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
@@ -146,7 +149,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         children: [
                                           Text(
                                             'Price : ',
-                                            style: cardDescriptionTextStyle,
+                                            style: descriptionTextStyle,
                                           ),
                                           Text(
                                             '\$' +
@@ -161,7 +164,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         children: [
                                           Text(
                                             'Market Capital : ',
-                                            style: cardDescriptionTextStyle,
+                                            style: descriptionTextStyle,
                                           ),
                                           Text(
                                             '\$' +
@@ -175,7 +178,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         children: [
                                           Text(
                                             'Rank : ',
-                                            style: cardDescriptionTextStyle,
+                                            style: descriptionTextStyle,
                                           ),
                                           Text(
                                             cryptoCoins[index]['rank'],
@@ -187,7 +190,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         children: [
                                           Text(
                                             'Market Dominance : ',
-                                            style: cardDescriptionTextStyle,
+                                            style: descriptionTextStyle,
                                           ),
                                           Text(
                                             (double.parse(cryptoCoins[index][

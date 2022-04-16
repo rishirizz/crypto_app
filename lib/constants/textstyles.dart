@@ -36,7 +36,7 @@ TextStyle contentTextStyle = GoogleFonts.getFont(
   fontWeight: FontWeight.w200,
 );
 
-TextStyle cardDescriptionTextStyle = GoogleFonts.getFont(
+TextStyle descriptionTextStyle = GoogleFonts.getFont(
   'Ruda',
   fontSize: 16,
 );
