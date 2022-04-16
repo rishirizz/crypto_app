@@ -1,3 +1,4 @@
+import 'package:crypto_app/screens/coin_info_screen.dart';
 import 'package:crypto_app/screens/dashboard_screen.dart';
 import 'package:crypto_app/screens/splash_screen.dart';
 import 'package:crypto_app/theme/theme.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         var routes = <String, WidgetBuilder>{
           '/splash': (BuildContext context) => const SplashScreen(),
           '/dashBoard': (BuildContext context) => const DashBoardScreen(),
+          '/coinInfo': (BuildContext context) => const CoinInfoScreen(),
         };
         WidgetBuilder builder = routes[settings.name]!;
         return MaterialPageRoute(
