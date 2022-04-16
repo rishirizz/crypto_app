@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: lightModeTheme,
       darkTheme: darkModeTheme,
       home: const SplashScreen(),
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         var routes = <String, WidgetBuilder>{
           '/splash': (BuildContext context) => const SplashScreen(),
           '/dashBoard': (BuildContext context) => const DashBoardScreen(),
-          '/coinInfo': (BuildContext context) => const CoinInfoScreen(),
+          '/coinInfo': (BuildContext context) =>
+              CoinInfoScreen(settings.arguments as Map),
         };
         WidgetBuilder builder = routes[settings.name]!;
         return MaterialPageRoute(

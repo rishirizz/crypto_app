@@ -1,4 +1,5 @@
 import 'package:crypto_app/api_services/crypto_api.dart';
+import 'package:crypto_app/constants/textstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
@@ -25,8 +26,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             'Crypto Tracker',
+            style: appBarTitleStyle,
           ),
           elevation: 3,
         ),
@@ -38,7 +40,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset('assets/crypto_loading.json'),
-                      const Text('Hold Up, Loading...'),
+                      Text(
+                        'Hold Up, Loading...',
+                        style: contentTextStyle.copyWith(
+                          color: Colors.teal,
+                        ),
+                      ),
                     ],
                   )
                 : RefreshIndicator(
@@ -52,109 +59,151 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       cacheExtent: 2500,
                       itemCount: cryptoCoins.length,
                       physics: const BouncingScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) => Card(
-                        elevation: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
-                                  child: Image.network(
-                                    cryptoCoins[index]['logo_url'],
-                                    height: 90,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            SvgPicture.network(
+                      itemBuilder: (BuildContext context, int index) => InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/coinInfo',
+                            arguments: Map<String, dynamic>.from(
+                              cryptoCoins[
+                                  index], //passing as Map as each particular index is a Map
+                            ),
+                          );
+                        },
+                        child: Card(
+                          elevation: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 4.0),
+                                    child: Image.network(
                                       cryptoCoins[index]['logo_url'],
                                       height: 90,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              SvgPicture.network(
+                                        cryptoCoins[index]['logo_url'],
+                                        height: 90,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 30,
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          cryptoCoins[index]['name'],
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text('(' +
-                                            cryptoCoins[index]['symbol'] +
-                                            ')'),
-                                        const Expanded(
-                                          child: SizedBox(),
-                                        ),
-                                        if (index == 0)
-                                          Lottie.asset(
-                                            'assets/gold-badge.json',
-                                            height: 30,
-                                          ),
-                                        if (index == 1)
-                                          Lottie.asset(
-                                            'assets/silver-badge.json',
-                                            height: 30,
-                                          ),
-                                        if (index == 2)
-                                          Lottie.asset(
-                                            'assets/bronze-badge.json',
-                                            height: 30,
-                                          ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      thickness: 2,
-                                      color: Colors.teal,
-                                    ),
-                                    const SizedBox(
-                                      height: 4,
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          'Price :  \$',
-                                        ),
-                                        Text(
-                                          double.parse(
-                                                  cryptoCoins[index]['price'])
-                                              .toStringAsFixed(2),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Market Capital :  \$${cryptoCoins[index]['market_cap']}',
-                                    ),
-                                    Text(
-                                      'Rank : ${cryptoCoins[index]['rank']}',
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          'Market Dominance : ',
-                                        ),
-                                        Text(
-                                          (double.parse(cryptoCoins[index][
-                                                          'market_cap_dominance']) *
-                                                      100)
-                                                  .toStringAsFixed(2) +
-                                              ' %',
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                const SizedBox(
+                                  width: 30,
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            cryptoCoins[index]['name'],
+                                            style: cardHeaderTextStyle,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            '(' +
+                                                cryptoCoins[index]['symbol'] +
+                                                ')',
+                                            style: cardPrimaryTextStyle,
+                                          ),
+                                          const Expanded(
+                                            child: SizedBox(),
+                                          ),
+                                          if (index == 0)
+                                            Lottie.asset(
+                                              'assets/gold-badge.json',
+                                              height: 30,
+                                            ),
+                                          if (index == 1)
+                                            Lottie.asset(
+                                              'assets/silver-badge.json',
+                                              height: 30,
+                                            ),
+                                          if (index == 2)
+                                            Lottie.asset(
+                                              'assets/bronze-badge.json',
+                                              height: 30,
+                                            ),
+                                        ],
+                                      ),
+                                      const Divider(
+                                        thickness: 2,
+                                        color: Colors.teal,
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Price : ',
+                                            style: cardDescriptionTextStyle,
+                                          ),
+                                          Text(
+                                            '\$' +
+                                                double.parse(cryptoCoins[index]
+                                                        ['price'])
+                                                    .toStringAsFixed(2),
+                                            style: cardSecondaryTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Market Capital : ',
+                                            style: cardDescriptionTextStyle,
+                                          ),
+                                          Text(
+                                            '\$' +
+                                                cryptoCoins[index]
+                                                    ['market_cap'],
+                                            style: cardSecondaryTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Rank : ',
+                                            style: cardDescriptionTextStyle,
+                                          ),
+                                          Text(
+                                            cryptoCoins[index]['rank'],
+                                            style: cardSecondaryTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Market Dominance : ',
+                                            style: cardDescriptionTextStyle,
+                                          ),
+                                          Text(
+                                            (double.parse(cryptoCoins[index][
+                                                            'market_cap_dominance']) *
+                                                        100)
+                                                    .toStringAsFixed(2) +
+                                                ' %',
+                                            style: cardSecondaryTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
