@@ -33,6 +33,7 @@ flutter:
     - assets/silver-badge.json
     - assets/bronze-badge.json
     - assets/crypto_loading.json
+    - assets/crypto_graph.json
 
 flutter_icons:
   image_path: "assets/tracker.png"
