@@ -50,7 +50,7 @@ class _CoinInfoScreenState extends State<CoinInfoScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  cryptoCoin!['id'] + ' Details',
+                  cryptoCoin!['name'] + '  Details',
                   style: cardPrimaryTextStyle.copyWith(
                     color: Colors.teal[200],
                     fontSize: 22,
@@ -78,7 +78,8 @@ class _CoinInfoScreenState extends State<CoinInfoScreen> {
                             ),
                             Text(
                               '# ' + cryptoCoin!['rank'],
-                              style: cardSecondaryTextStyle,
+                              style: cardSecondaryTextStyle.copyWith(
+                                  color: Colors.tealAccent),
                             ),
                           ],
                         ),
@@ -91,8 +92,23 @@ class _CoinInfoScreenState extends State<CoinInfoScreen> {
                             ),
                             Text(
                               cryptoCoin!['status'],
-                              style: cardSecondaryTextStyle,
+                              style: cardSecondaryTextStyle.copyWith(
+                                color: (cryptoCoin!['status'] == 'active')
+                                    ? Colors.green[300]
+                                    : Colors.yellow,
+                              ),
                             ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Currency',
+                              style: descriptionTextStyle,
+                            ),
+                            Text(cryptoCoin!['currency'],
+                                style: cardSecondaryTextStyle),
                           ],
                         ),
                         Row(
