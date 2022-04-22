@@ -25,6 +25,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/cryptoPie');
+          },
+        ),
         appBar: AppBar(
           title: Text(
             'Crypto Tracker',

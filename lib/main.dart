@@ -1,3 +1,4 @@
+import 'package:crypto_app/components/crypto_pie.dart';
 import 'package:crypto_app/screens/coin_info_screen.dart';
 import 'package:crypto_app/screens/dashboard_screen.dart';
 import 'package:crypto_app/screens/splash_screen.dart';
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
           '/dashBoard': (BuildContext context) => const DashBoardScreen(),
           '/coinInfo': (BuildContext context) =>
               CoinInfoScreen(settings.arguments as Map),
+          // '/cryptoPie': (BuildContext context) => DonutAutoLabelChart(
+          //       const [],
+          //       animate: true,
+          //     ),
         };
         WidgetBuilder builder = routes[settings.name]!;
         return MaterialPageRoute(
